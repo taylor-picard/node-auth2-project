@@ -7,7 +7,7 @@ const { JWT_SECRET } = require("../secrets"); // use this secret!
 
 router.post("/register", validateRoleName, (req, res, next) => {
   const {username, password, role_name} = req.body
-  const hash = bcrypt.hashSync(password)
+  const hash = bcrypt.hashSync(password, 8)
   Users.add({username, password:hash, role_name})
     .then(newUser => {
       res.status(201).json(newUser)
